@@ -1,0 +1,20 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Auteur] (Table)
+       [dbo].[Genre] (Table)
+       [dbo].[Livre] (Table)
+       [dbo].[Utilisateur] (Table)
+       [dbo].[FK_Livre_ToTable] (Foreign Key)
+       [dbo].[FK_Livre_ToTable_1] (Foreign Key)
+
+** Supporting actions

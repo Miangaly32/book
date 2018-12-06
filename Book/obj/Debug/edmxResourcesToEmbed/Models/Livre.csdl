@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Auteur">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Livres" Relationship="Self.FK_Livre_ToTable" FromRole="Auteur" ToRole="Livre" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Livres" Relationship="Self.FK_Livre_ToTable_1" FromRole="Genre" ToRole="Livre" />
+  </EntityType>
+  <EntityType Name="Livre">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Titre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DateSortie" Type="DateTime" Precision="0" />
+    <Property Name="IdAuteur" Type="Int32" />
+    <Property Name="IdGenre" Type="Int32" />
+    <NavigationProperty Name="Auteur" Relationship="Self.FK_Livre_ToTable" FromRole="Livre" ToRole="Auteur" />
+    <NavigationProperty Name="Genre" Relationship="Self.FK_Livre_ToTable_1" FromRole="Livre" ToRole="Genre" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="NomUtilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MotDePasse" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Livre_ToTable">
+    <End Role="Auteur" Type="Self.Auteur" Multiplicity="0..1" />
+    <End Role="Livre" Type="Self.Livre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Auteur">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Livre">
+        <PropertyRef Name="IdAuteur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Livre_ToTable_1">
+    <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+    <End Role="Livre" Type="Self.Livre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Livre">
+        <PropertyRef Name="IdGenre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bookEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Auteurs" EntityType="Self.Auteur" />
+    <EntitySet Name="Genres" EntityType="Self.Genre" />
+    <EntitySet Name="Livres" EntityType="Self.Livre" />
+    <EntitySet Name="Utilisateurs" EntityType="Self.Utilisateur" />
+    <AssociationSet Name="FK_Livre_ToTable" Association="Self.FK_Livre_ToTable">
+      <End Role="Auteur" EntitySet="Auteurs" />
+      <End Role="Livre" EntitySet="Livres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Livre_ToTable_1" Association="Self.FK_Livre_ToTable_1">
+      <End Role="Genre" EntitySet="Genres" />
+      <End Role="Livre" EntitySet="Livres" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

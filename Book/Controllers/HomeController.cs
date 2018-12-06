@@ -11,17 +11,15 @@ namespace Book.Controllers
     {
         public ActionResult Index()
         {
+
             return View();
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-            var db = new BookContext();
-            var utilisateurs = from u in db.Utilisateurs
-                        orderby u.Nom
-                        select u;
-            return View(utilisateurs);
+  
+            return View();
         }
 
         public ActionResult Contact()

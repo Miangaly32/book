@@ -1,0 +1,9 @@
+C:\Users\mrandria\Documents\Miangaly\M2\book\BookDB\bin\Debug\BookDB.dacpac
+C:\Users\mrandria\Documents\Miangaly\M2\book\BookDB\bin\Debug\BookDB.dll
+C:\Users\mrandria\Documents\Miangaly\M2\book\BookDB\bin\Debug\BookDB.pdb
+C:\Users\mrandria\Documents\Miangaly\M2\book\BookDB\obj\Debug\BookDB.dll
+C:\Users\mrandria\Documents\Miangaly\M2\book\BookDB\obj\Debug\BookDB.pdb
+C:\Users\mrandria\Documents\Miangaly\M2\book\BookDB\obj\Debug\Model.xml
+C:\Users\mrandria\Documents\Miangaly\M2\book\BookDB\obj\Debug\refactor.xml
+C:\Users\mrandria\Documents\Miangaly\M2\book\BookDB\obj\Debug\postdeploy.sql
+C:\Users\mrandria\Documents\Miangaly\M2\book\BookDB\obj\Debug\predeploy.sql
