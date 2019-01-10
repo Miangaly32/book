@@ -17,6 +17,7 @@ namespace Book.Models
     {
         public int Id { get; set; }
         public string Titre { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]

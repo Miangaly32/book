@@ -16,19 +16,7 @@ namespace Book.Controllers
 
         public ActionResult Index()
         {
-            if (Session["NomUtilisateur"]!=null)
-            {
-                Utilisateur u = new Utilisateur
-                {
-                    NomUtilisateur = Session["NomUtilisateur"].ToString()
-                };
-                ViewData["Message"] = u;
-                return View();
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }           
+           return View();   
         }
 
         public ActionResult Login()
@@ -42,7 +30,7 @@ namespace Book.Controllers
         public ActionResult Login(Utilisateur objUser)
         {
 
-             var obj = db.Utilisateurs.Where(a => a.NomUtilisateur.Equals(objUser.NomUtilisateur) && a.MotDePasse.Equals(objUser.MotDePasse)).FirstOrDefault();
+            var obj = db.Utilisateurs.Where(a => a.NomUtilisateur.Equals(objUser.NomUtilisateur) && a.MotDePasse.Equals(objUser.MotDePasse)).FirstOrDefault();
 
             if (obj != null)
             {
@@ -52,10 +40,14 @@ namespace Book.Controllers
             }
             return View(objUser);
         }
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
 
         public ActionResult Accueil()
         {
-
             var livres = livreService.GetAllLivres();
          //   var livres = db.Livres.Include(l => l.Auteur).Include(l => l.Genre);
             return View(livres.ToList());

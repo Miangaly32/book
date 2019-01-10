@@ -19,30 +19,35 @@ namespace Book.Controllers
         public ActionResult Index()
         {
             var livres = db.Livres.Include(l => l.Auteur).Include(l => l.Genre);
-            return View(livres.ToList());
+                return View(livres.ToList());
+           
         }
 
         // GET: Livres/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Livre livre = db.Livres.Find(id);
-            if (livre == null)
-            {
-                return HttpNotFound();
-            }
-            return View(livre);
+            
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Livre livre = db.Livres.Find(id);
+                if (livre == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(livre);
+            
         }
 
         // GET: Livres/Create
         public ActionResult Create()
         {
-            ViewBag.IdAuteur = new SelectList(db.Auteurs, "Id", "Nom");
+           
+                ViewBag.IdAuteur = new SelectList(db.Auteurs, "Id", "Nom");
             ViewBag.IdGenre = new SelectList(db.Genres, "Id", "Designation");
             return View();
+          
         }
 
         // POST: Livres/Create
