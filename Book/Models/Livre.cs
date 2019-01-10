@@ -11,15 +11,20 @@ namespace Book.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Livre
     {
         public int Id { get; set; }
         public string Titre { get; set; }
         public string Description { get; set; }
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateSortie { get; set; }
         public Nullable<int> IdAuteur { get; set; }
         public Nullable<int> IdGenre { get; set; }
+      
+        public string image { get; set; }
     
         public virtual Auteur Auteur { get; set; }
         public virtual Genre Genre { get; set; }

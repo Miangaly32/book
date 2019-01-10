@@ -36,6 +36,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            <img src="~/media/images/@Html.DisplayFor(model => model.image)" alt="Image" />
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Auteur.Nom)
         </dt>
 

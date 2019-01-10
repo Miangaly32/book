@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -12,7 +13,7 @@ namespace Book.Controllers
 {
     public class LivresController : Controller
     {
-        private bookEntities db = new bookEntities();
+        private bookEntities1 db = new bookEntities1();
 
         // GET: Livres
         public ActionResult Index()
@@ -49,13 +50,23 @@ namespace Book.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Titre,Description,DateSortie,IdAuteur,IdGenre")] Livre livre)
+        public ActionResult Create([Bind(Include = "Id,Titre,Description,DateSortie,IdAuteur,IdGenre,image")] Livre livre, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
-                db.Livres.Add(livre);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+           
+                if (image != null)
+                {
+                    string path = Path.Combine(Server.MapPath("~/media/images"), Path.GetFileName(image.FileName));
+                    image.SaveAs(path);
+
+                    livre.image = image.FileName;
+                    db.Livres.Add(livre);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+
             }
 
             ViewBag.IdAuteur = new SelectList(db.Auteurs, "Id", "Nom", livre.IdAuteur);
@@ -85,13 +96,22 @@ namespace Book.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Titre,Description,DateSortie,IdAuteur,IdGenre")] Livre livre)
+        public ActionResult Edit([Bind(Include = "Id,Titre,Description,DateSortie,IdAuteur,IdGenre,image")] Livre livre, HttpPostedFileBase  image)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(livre).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (image != null)
+                {
+                    string path = Path.Combine(Server.MapPath("~/media/images"), Path.GetFileName(image.FileName));
+                    image.SaveAs(path);
+
+                    livre.image = image.FileName;
+                    db.Entry(livre).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+
+                }
             }
             ViewBag.IdAuteur = new SelectList(db.Auteurs, "Id", "Nom", livre.IdAuteur);
             ViewBag.IdGenre = new SelectList(db.Genres, "Id", "Designation", livre.IdGenre);

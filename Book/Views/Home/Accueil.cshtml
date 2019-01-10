@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Book.Models.Livre>
+
+@{
+    ViewBag.Title = "Accueil";
+    Layout = "~/Views/Shared/front_layout.cshtml";
+}
+
+<h2>Accueil</h2>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li> @Html.DisplayFor(modelItem => item.Titre)</li>
+    }
+</ul>

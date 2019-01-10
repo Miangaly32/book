@@ -13,10 +13,10 @@ namespace Book.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class bookEntities : DbContext
+    public partial class bookEntities1 : DbContext
     {
-        public bookEntities()
-            : base("name=bookEntities")
+        public bookEntities1()
+            : base("name=bookEntities1")
         {
         }
     
@@ -25,6 +25,7 @@ namespace Book.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<Auteur> Auteurs { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Livre> Livres { get; set; }

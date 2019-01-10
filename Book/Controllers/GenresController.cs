@@ -12,7 +12,7 @@ namespace Book.Controllers
 {
     public class GenresController : Controller
     {
-        private bookEntities db = new bookEntities();
+        private bookEntities1 db = new bookEntities1();
 
         // GET: Genres
         public ActionResult Index()

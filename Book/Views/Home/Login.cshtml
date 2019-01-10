@@ -1,0 +1,18 @@
+﻿@model Book.Models.Utilisateur
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <h2>Connexion</h2>
+    <div>
+        @Html.TextBoxFor(s => s.NomUtilisateur, new { @placeholder = "Nom d'utilisateur" })
+        <br /> <br />
+        @Html.PasswordFor(s => s.MotDePasse, new { @placeholder = "Mot de passe" })
+        <br /> <br />
+        <button type="submit">Se connecter</button>
+    </div>
+}

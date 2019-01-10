@@ -5,11 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="bookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Auteur">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nom" Type="nvarchar" MaxLength="50" />
           <Property Name="Prenom" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -17,25 +23,26 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Designation" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Livre">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Titre" Type="nvarchar" MaxLength="100" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
           <Property Name="DateSortie" Type="date" />
           <Property Name="IdAuteur" Type="int" />
           <Property Name="IdGenre" Type="int" />
+          <Property Name="image" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Utilisateur">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NomUtilisateur" Type="nvarchar" MaxLength="50" />
           <Property Name="MotDePasse" Type="nvarchar" MaxLength="250" />
         </EntityType>
@@ -64,6 +71,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="bookModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Auteur" EntityType="Self.Auteur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Livre" EntityType="Self.Livre" Schema="dbo" store:Type="Tables" />
@@ -82,11 +90,17 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
         <EntityType Name="Auteur">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Livres" Relationship="Self.FK_Livre_ToTable" FromRole="Auteur" ToRole="Livre" />
@@ -95,7 +109,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Livres" Relationship="Self.FK_Livre_ToTable_1" FromRole="Genre" ToRole="Livre" />
         </EntityType>
@@ -103,12 +117,13 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Titre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="DateSortie" Type="DateTime" Precision="0" />
           <Property Name="IdAuteur" Type="Int32" />
           <Property Name="IdGenre" Type="Int32" />
+          <Property Name="image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Auteur" Relationship="Self.FK_Livre_ToTable" FromRole="Livre" ToRole="Auteur" />
           <NavigationProperty Name="Genre" Relationship="Self.FK_Livre_ToTable_1" FromRole="Livre" ToRole="Genre" />
         </EntityType>
@@ -116,7 +131,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NomUtilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MotDePasse" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -144,7 +159,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="bookEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="bookEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="Auteurs" EntityType="Self.Auteur" />
           <EntitySet Name="Genres" EntityType="Self.Genre" />
           <EntitySet Name="Livres" EntityType="Self.Livre" />
@@ -163,7 +179,14 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="bookModelStoreContainer" CdmEntityContainer="bookEntities">
+        <EntityContainerMapping StorageEntityContainer="bookModelStoreContainer" CdmEntityContainer="bookEntities1">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="bookModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Auteurs">
             <EntityTypeMapping TypeName="bookModel.Auteur">
               <MappingFragment StoreEntitySet="Auteur">
@@ -190,6 +213,7 @@
                 <ScalarProperty Name="DateSortie" ColumnName="DateSortie" />
                 <ScalarProperty Name="IdAuteur" ColumnName="IdAuteur" />
                 <ScalarProperty Name="IdGenre" ColumnName="IdGenre" />
+                <ScalarProperty Name="image" ColumnName="image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
