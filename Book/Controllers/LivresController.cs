@@ -44,7 +44,7 @@ namespace Book.Controllers
         public ActionResult Create()
         {
            
-                ViewBag.IdAuteur = new SelectList(db.Auteurs, "Id", "Nom");
+            ViewBag.IdAuteur = new SelectList(db.Auteurs, "Id", "Nom");
             ViewBag.IdGenre = new SelectList(db.Genres, "Id", "Designation");
             return View();
           
@@ -156,6 +156,23 @@ namespace Book.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // FRONT //
+
+        public ActionResult Livre(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Livre livre = db.Livres.Find(id);
+            if (livre == null)
+            {
+                return HttpNotFound();
+            }
+            return View(livre);
+
         }
     }
 }

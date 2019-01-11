@@ -46,12 +46,7 @@ namespace Book.Controllers
             return RedirectToAction("Login");
         }
 
-        public ActionResult Accueil()
-        {
-            var livres = livreService.GetAllLivres();
-         //   var livres = db.Livres.Include(l => l.Auteur).Include(l => l.Genre);
-            return View(livres.ToList());
-        }
+       
 
         public ActionResult About()
         {
@@ -65,6 +60,23 @@ namespace Book.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+
+        // FRONT //
+
+        public ActionResult Accueil()
+        {
+            var livres = livreService.GetAllLivres();
+            //   var livres = db.Livres.Include(l => l.Auteur).Include(l => l.Genre);
+            return View(livres.ToList());
+        }
+
+        public ActionResult Search()
+        {
+            var livres = livreService.GetAllLivres();
+            //   var livres = db.Livres.Include(l => l.Auteur).Include(l => l.Genre);
+            return View(livres.ToList());
         }
     }
 }

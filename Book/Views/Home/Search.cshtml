@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Book.Models.Livre>
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/front_layout.cshtml";
+}
+
+<h2>Result</h2>
+
+<div class="gameBox">
+    <div class="gameBox__header">
+        <h2>Recherche</h2>
+        <!-- Eto no asiana recherche multicritere-->
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div style="margin-bottom: 25px;">
+                <label>@Html.DisplayFor(modelItem => item.Titre)</label>
+                <br />
+                <a href="@Url.Action("Details", "Livres",item.Id)"><img src="~/media/images/@Html.DisplayFor(modelItem => item.image)" alt="Image" /></a>
+                <br />
+                <br />
+                <a href="@Url.Action("Details", "Livres",item.Id)" class="gameBox__btn gameBox__btn--large">Details</a>
+            </div>
+        }
+    </div>
+</div>

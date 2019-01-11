@@ -1,18 +1,34 @@
 ﻿
 <!DOCTYPE html>
 
-<html>
+<html lang="en" class="no-js">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link href="@Url.Content("~/media/stylesheets/application.css")" rel="stylesheet" type="text/css" />
     @RenderSection("Styles", false)
     <title>Book</title>
 </head>
-<body>
-    <div class="gameMenu">
-    </div>
-    <div class="gameContainer">
-        @RenderBody()
-     </div>
-</body>
+    <body>
+        <div class="gameMenu">
+            <ul>
+                <li>
+                    <a href="@Url.Action("Accueil", "Home")" class="gameBox__btn gameBox__btn--menu active">Accueil</a>
+                </li>
+                <li>
+                    <a href="/" class="gameBox__btn gameBox__btn--menu active">Genres</a>
+                </li>
+                <li>
+                    <a href="/" class="gameBox__btn gameBox__btn--menu active">Auteurs</a>
+                </li>
+            </ul>
+        </div>
+        <div class="gameContainer">
+            @RenderBody()
+            <div class="gameBoxBackground">
+                <img class="gameBoxBackground__image" src="@Url.Content("~/media/images/img_backgroud.png")" />
+            </div>
+        </div>
+    </body>
 </html>

@@ -4,11 +4,21 @@
     ViewBag.Title = "Accueil";
     Layout = "~/Views/Shared/front_layout.cshtml";
 }
-
-<h2>Accueil</h2>
-<ul>
-    @foreach (var item in Model)
-    {
-        <li> @Html.DisplayFor(modelItem => item.Titre)</li>
-    }
-</ul>
+<div class="gameBox">
+    <div class="gameBox__header">
+        <h2>Nouveautés</h2>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {   
+        <div style="margin-bottom: 25px;">
+            <label>@Html.DisplayFor(modelItem => item.Titre)</label>
+            <br />
+            <a href="@Url.Action("Details", "Livres",item.Id)"><img src="~/media/images/@Html.DisplayFor(modelItem => item.image)" alt="Image" /></a>
+            <br />
+            <br />
+            <a href="@Url.Action("Details", "Livres",item.Id)" class="gameBox__btn gameBox__btn--large">Details</a>
+        </div>
+        }
+    </div>
+</div>

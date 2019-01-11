@@ -28,8 +28,9 @@ namespace Book.Services
                 while (rdr.Read())
                 {
                     Livre livre = new Livre();
-
+                    livre.Id =(int) rdr["Id"];
                     livre.Titre = rdr["Titre"].ToString();
+                    livre.image = rdr["image"].ToString();
 
                     lstLivre.Add(livre);
                 }
