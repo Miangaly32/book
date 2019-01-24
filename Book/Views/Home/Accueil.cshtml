@@ -7,7 +7,13 @@
 <div class="gameBox">
     <div class="gameBox__header">
         <h2>Nouveautés</h2>
+        @using (Html.BeginForm("SearchByKeywords", "Home", FormMethod.Post))
+        {
+            <input type="text" name="keywords"  id="keywords" placeholder="Recherche" />
+            <button type="submit">Rechercher</button>
+        }
     </div>
+
     <div class="row">
         @foreach (var item in Model)
         {   

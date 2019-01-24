@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Book.Models;
+using System.Data.Entity.Validation;
 
 namespace Book.Controllers
 {
@@ -59,16 +60,31 @@ namespace Book.Controllers
         {
             if (ModelState.IsValid)
             {
-           
+
                 if (image != null)
                 {
                     string path = Path.Combine(Server.MapPath("~/media/images"), Path.GetFileName(image.FileName));
                     image.SaveAs(path);
-
-                    livre.image = image.FileName;
-                    db.Livres.Add(livre);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    try { 
+                        livre.image = image.FileName;
+                        db.Livres.Add(livre);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                     }
+                    catch (DbEntityValidationException e)
+                    {
+                        foreach (var eve in e.EntityValidationErrors)
+                        {
+                            Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                            foreach (var ve in eve.ValidationErrors)
+                            {
+                                Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                    ve.PropertyName, ve.ErrorMessage);
+                            }
+                        }
+                        throw;
+                    }
 
                 }
 

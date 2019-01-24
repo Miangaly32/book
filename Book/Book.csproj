@@ -138,38 +138,41 @@
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LivresController.cs" />
-    <Compile Include="Controllers\UtilisateursController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Auteur.cs">
-      <DependentUpon>Livre.tt</DependentUpon>
+      <DependentUpon>Book.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Book.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Book.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Book.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Book.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Book.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Book.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__RefactorLog.cs">
+      <DependentUpon>Book.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Genre.cs">
-      <DependentUpon>Livre.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Livre.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Livre.Context.tt</DependentUpon>
+      <DependentUpon>Book.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Livre.cs">
-      <DependentUpon>Livre.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Livre.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Livre.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Livre1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Livre.tt</DependentUpon>
+      <DependentUpon>Book.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Utilisateur.cs">
-      <DependentUpon>Livre.tt</DependentUpon>
+      <DependentUpon>Book.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\LivreService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -180,24 +183,51 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Livre.Context.tt">
+    <Content Include="media\images\apple-touch-icon-retina.png" />
+    <Content Include="media\images\apple-touch-icon.png" />
+    <Content Include="media\images\favicon.ico" />
+    <Content Include="media\images\grails-cupsonly-logo-white.svg" />
+    <Content Include="media\images\grails.svg" />
+    <Content Include="media\images\img_backgroud.png" />
+    <Content Include="media\images\skin\database_add.png" />
+    <Content Include="media\images\skin\database_delete.png" />
+    <Content Include="media\images\skin\database_edit.png" />
+    <Content Include="media\images\skin\database_save.png" />
+    <Content Include="media\images\skin\database_table.png" />
+    <Content Include="media\images\skin\exclamation.png" />
+    <Content Include="media\images\skin\house.png" />
+    <Content Include="media\images\skin\information.png" />
+    <Content Include="media\images\skin\shadow.jpg" />
+    <Content Include="media\images\skin\sorted_asc.gif" />
+    <Content Include="media\images\skin\sorted_desc.gif" />
+    <Content Include="media\images\spinner.gif" />
+    <Content Include="media\javascripts\application.js" />
+    <Content Include="media\javascripts\bootstrap.js" />
+    <Content Include="media\javascripts\jquery-2.2.0.min.js" />
+    <Content Include="media\stylesheets\application.css" />
+    <Content Include="media\stylesheets\bootstrap.css" />
+    <Content Include="media\stylesheets\errors.css" />
+    <Content Include="media\stylesheets\grails.css" />
+    <Content Include="media\stylesheets\main.css" />
+    <Content Include="media\stylesheets\mobile.css" />
+    <Content Include="Models\Book.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Livre.edmx</DependentUpon>
-      <LastGenOutput>Livre.Context.cs</LastGenOutput>
+      <DependentUpon>Book.edmx</DependentUpon>
+      <LastGenOutput>Book.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Livre.tt">
+    <Content Include="Models\Book.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Livre.edmx</DependentUpon>
-      <LastGenOutput>Livre1.cs</LastGenOutput>
+      <DependentUpon>Book.edmx</DependentUpon>
+      <LastGenOutput>Book.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\Livre.edmx">
+    <EntityDeploy Include="Models\Book.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Livre.Designer.cs</LastGenOutput>
+      <LastGenOutput>Book.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Livre.edmx.diagram">
-      <DependentUpon>Livre.edmx</DependentUpon>
+    <Content Include="Models\Book.edmx.diagram">
+      <DependentUpon>Book.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -226,6 +256,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\front_layout.cshtml" />
+    <Content Include="Views\Home\Accueil.cshtml" />
     <Content Include="Views\Auteurs\Create.cshtml" />
     <Content Include="Views\Auteurs\Delete.cshtml" />
     <Content Include="Views\Auteurs\Details.cshtml" />
@@ -241,11 +273,10 @@
     <Content Include="Views\Livres\Details.cshtml" />
     <Content Include="Views\Livres\Edit.cshtml" />
     <Content Include="Views\Livres\Index.cshtml" />
-    <Content Include="Views\Utilisateurs\Create.cshtml" />
-    <Content Include="Views\Utilisateurs\Delete.cshtml" />
-    <Content Include="Views\Utilisateurs\Details.cshtml" />
-    <Content Include="Views\Utilisateurs\Edit.cshtml" />
-    <Content Include="Views\Utilisateurs\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Livres\Livre.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Shared\login_layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

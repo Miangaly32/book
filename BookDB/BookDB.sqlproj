@@ -64,4 +64,7 @@
     <Build Include="Genre.sql" />
     <Build Include="Utilisateur.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="BookDB.refactorlog" />
+  </ItemGroup>
 </Project>

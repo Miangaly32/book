@@ -1,0 +1,216 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require bootstrap
+*= require grails
+*= require main
+*= require mobile
+*= require_self
+*/
+body{
+    background-color: #e5f0ff;
+}
+.gameMenu{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(90deg,#ff5c72,#a485f2);
+}
+.gameMenu ul{
+    list-style: none;
+    padding: 16px 0;
+}
+.gameMenu li{
+    display: inline;
+    padding: 0 16px;
+}
+.gameContainer{
+    position: relative;
+    background-color: white;
+    min-height: 500px;
+}
+.gameBox{
+    position: absolute;
+    left: 50%;
+    top: 60px;
+    transform: translateX(-50%);
+    box-shadow: 0px 0px 50px -19px rgba(0,0,0,0.72);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    z-index: 2;
+    margin: 0 0 64px;
+}
+
+.gameBox__header {
+    width: 100%;
+    text-align: center;
+    margin: 16px 0 32px;
+}
+.gameBox__header h2{
+    margin: 0;
+}
+.gameBox__input{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.gameBox__input.submit{
+    justify-content: center;
+}
+.gameBox__result{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 24px 0;
+}
+.gameBox__result p{
+    margin: 0 16px;
+}
+.result-player{
+    text-align: center;
+    padding: 16px 32px;
+}
+.result-player.winner{
+    border: 2px solid #e5f0ff;
+    border-radius: 50%;
+}
+.result-player-list.winner-list{
+    border-bottom: 5px dashed #4cae4c;
+}
+.result-player span{
+    display: block;
+}
+.gameBox__message{
+    width: 100%;
+    cursor: pointer;
+}
+.gameBox__message ul{
+    list-style: none;
+}
+.gameBox__message ul a{
+    font-weight: 600;
+    text-decoration: none;
+}
+.gameBox__message ul a.read{
+    font-weight: lighter;
+    text-decoration: none;
+}
+.gameBox__message ul a li p{
+    color: #000;
+}
+.gameBox__message ul a.read li p{
+   color: #9d9d9d;
+}
+.gameBox__message ul li{
+    padding: 16px 0;
+}
+.gameBox__message ul li.read,
+.gameBox__message ul li {
+    position: relative;
+    border-bottom: 1px solid #cccccc;
+}
+.gameBox__message ul li:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+}
+.gameBox__message ul li.read:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255,255,255,0.2);
+}
+.gameBox__btn {
+    padding: 4px 24px;
+    border-radius: 28px;
+    background: #ff5c72;
+    text-decoration: none;
+    font-weight: 400;
+    color: white;
+    font-size: 16px;
+    margin: 16px 0;
+}
+.gameBox__btn:hover {
+    color: white;
+}
+.gameBox__btn--large {
+    padding: 8px 32px;
+    font-size: 22px;
+}
+.gameBox__btn--submit{
+    background: #7aa93c;
+}
+.gameBox__btn--link {
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: 400;
+    color: #ccc;
+    font-size: 16px;
+    margin: 16px 0;
+}
+.gameBox__btn--menu {
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: 400;
+    color: #fff;
+    font-size: 16px;
+    margin: 16px 0;
+}
+.gameBox__btn--link.active {
+    text-decoration: underline;
+}
+.gameBox__btn--link:hover {
+    color: #ccc;
+    text-decoration: underline;
+}
+.gameBox__btn--menu:hover{
+    color: #ffff00;
+    text-decoration: underline;
+}
+.contentMessage{
+    text-align: center;
+}
+.messageInbox {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+button.gameBox__btn {
+    border: 0;
+}
+.gameBoxBackground{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+.gameBoxBackground__image{
+    width: 100%;
+    height: auto;
+}
