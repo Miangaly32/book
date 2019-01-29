@@ -24,7 +24,7 @@
                 <option disabled selected>Auteur</option>
                 @foreach (var item in auteurs)
                 {
-                    <option  value="@item.Id">@item.Nom @item.Prenom</option>
+                <option value="@item.Id">@item.Prenom @item.Nom</option>
                 }
             </select>
             <button class="btn btn-default" type="submit">Rechercher</button>

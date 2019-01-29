@@ -1,4 +1,8 @@
-﻿
+﻿@{
+    var Title = ViewBag.Title;
+    List<Book.Models.Genre> genres = ViewBag.genres;
+    List<Book.Models.Auteur> auteurs = ViewBag.auteurs;
+}
 <!DOCTYPE html>
 
 <html lang="en" class="no-js">
@@ -8,27 +12,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link href="@Url.Content("~/media/stylesheets/application.css")" rel="stylesheet" type="text/css" />
     @RenderSection("Styles", false)
-    <title>Book</title>
+    <title>@Title</title>
 </head>
-    <body>
-        <div class="gameMenu">
-            <ul>
-                <li>
-                    <a href="@Url.Action("Accueil", "Home")" class="gameBox__btn gameBox__btn--menu active">Accueil</a>
-                </li>
-                <li>
-                    <a href="/" class="gameBox__btn gameBox__btn--menu active">Genres</a>
-                </li>
-                <li>
-                    <a href="/" class="gameBox__btn gameBox__btn--menu active">Auteurs</a>
-                </li>
-            </ul>
+<body>
+    <div class="gameMenu">
+        <ul>
+            <li>
+                <button onclick="location.href='@Url.Action("Accueil", "Home")'"  class="gameBox__btn gameBox__btn--menu active">Accueil</button>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn gameBox__btn gameBox__btn--menu active">Genres</button>
+                    <div class="dropdown-content">
+                        @foreach (var item in genres)
+                        {
+                            <a href="@Url.Action("SearchByGenre", "Home",new { idgenre = @item.Id })">@item.Designation</a>
+                        }
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn gameBox__btn gameBox__btn--menu active">Auteurs</button>
+                    <div class="dropdown-content">
+                        @foreach (var item in auteurs)
+                        {
+                        <a href="@Url.Action("SearchByAuteur", "Home",new { idauteur = @item.Id })">@item.Prenom @item.Nom</a>
+                        }
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="gameContainer">
+        @RenderBody()
+        <div class="gameBoxBackground">
+            <img class="gameBoxBackground__image" src="@Url.Content("~/media/images/img_backgroud.png")" />
         </div>
-        <div class="gameContainer">
-            @RenderBody()
-            <div class="gameBoxBackground">
-                <img class="gameBoxBackground__image" src="@Url.Content("~/media/images/img_backgroud.png")" />
-            </div>
-        </div>
-    </body>
+    </div>
+</body>
 </html>

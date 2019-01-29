@@ -71,6 +71,8 @@ namespace Book.Controllers
         {
             var livres = livreService.GetAllLivres();
             //   var livres = db.Livres.Include(l => l.Auteur).Include(l => l.Genre);
+            ViewBag.genres = genreService.GetAllGenres().ToList();
+            ViewBag.auteurs = auteurService.GetAllAuteurs().ToList();
             return View(livres.ToList());
         }
         
@@ -84,6 +86,43 @@ namespace Book.Controllers
             livre.Auteur = new Auteur(keywords, keywords);
 
             List<Livre> livres =  livreService.Search(livre);
+
+            List<Genre> genres = genreService.GetAllGenres().ToList();
+            List<Auteur> auteurs = auteurService.GetAllAuteurs().ToList();
+
+
+            ViewBag.livres = livres;
+            ViewBag.genres = genres;
+            ViewBag.auteurs = auteurs;
+
+            return View("Search");
+        }
+        
+        public ActionResult SearchByGenre(int idgenre=0)
+        {
+            Livre livre = new Livre();
+            livre.Genre = new Genre(idgenre);
+
+            List<Livre> livres = livreService.SearchMulticritere(livre);
+
+            List<Genre> genres = genreService.GetAllGenres().ToList();
+            List<Auteur> auteurs = auteurService.GetAllAuteurs().ToList();
+
+
+            ViewBag.livres = livres;
+            ViewBag.genres = genres;
+            ViewBag.auteurs = auteurs;
+
+            return View("Search");
+        }
+
+        public ActionResult SearchByAuteur(int idauteur = 0)
+        {
+            Livre livre = new Livre();
+            livre.Auteur = new Auteur(idauteur);
+
+            List<Livre> livres = livreService.SearchMulticritere(livre);
+
             List<Genre> genres = genreService.GetAllGenres().ToList();
             List<Auteur> auteurs = auteurService.GetAllAuteurs().ToList();
 
