@@ -26,6 +26,11 @@ namespace Book.Models
             Prenom = prenom;
         }
 
+        public Auteur(int id)
+        {
+            Id = id;
+        }
+
         public int Id { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }

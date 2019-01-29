@@ -20,6 +20,11 @@ namespace Book.Models
             this.Livres = new HashSet<Livre>();
         }
 
+        public Genre(int id)
+        {
+            Id = id;
+        }
+
         public Genre(string designation)
         {
             Designation = designation;

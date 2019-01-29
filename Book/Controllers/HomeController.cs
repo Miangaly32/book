@@ -13,7 +13,9 @@ namespace Book.Controllers
     public class HomeController : Controller
     {
         private bookEntities1 db = new bookEntities1();
-        LivreService livreService = new LivreService();
+        LivreService livreService = new LivreService(); 
+         GenreService genreService = new GenreService();
+        AuteurService auteurService = new AuteurService();
 
         public ActionResult Index()
         {
@@ -80,8 +82,43 @@ namespace Book.Controllers
             livre.Genre = new Genre(keywords);
             livre.Description = keywords;
             livre.Auteur = new Auteur(keywords, keywords);
+
             List<Livre> livres =  livreService.Search(livre);
-            return View("Search", livres);
+            List<Genre> genres = genreService.GetAllGenres().ToList();
+            List<Auteur> auteurs = auteurService.GetAllAuteurs().ToList();
+
+
+            ViewBag.livres = livres;
+            ViewBag.genres = genres;
+            ViewBag.auteurs = auteurs;
+
+            return View("Search");
+        }
+
+        [HttpGet]
+        public ActionResult SearchMulticritere(String titre,int idgenre=-1,int idauteur=-1)
+        {
+            Livre livre = new Livre();
+            livre.Titre = titre;
+
+            if (idgenre != -1)
+            {
+                livre.Genre = new Genre(idgenre);
+            }
+            if (idauteur!=-1) {
+                livre.Auteur = new Auteur(idauteur);
+            }
+
+            List<Livre> livres = livreService.SearchMulticritere(livre);
+
+            List<Genre> genres = genreService.GetAllGenres().ToList();
+            List<Auteur> auteurs = auteurService.GetAllAuteurs().ToList();
+            
+            ViewBag.livres = livres;
+            ViewBag.genres = genres;
+            ViewBag.auteurs = auteurs;
+
+            return View("Search");
         }
     }
 }

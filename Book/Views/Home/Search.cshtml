@@ -1,22 +1,39 @@
-﻿@model List<Book.Models.Livre>
-@{
+﻿@{
     ViewBag.Title = "Result";
     Layout = "~/Views/Shared/front_layout.cshtml";
+    List< Book.Models.Livre> livres  = ViewBag.livres;
+    List<Book.Models.Genre> genres = ViewBag.genres;
+    List<Book.Models.Auteur> auteurs = ViewBag.auteurs;
 }
+
 
 <div class="gameBox">
     <div class="gameBox__header">
         <h2>Recherche</h2>
-        @using (Html.BeginForm("SearchByKeywords", "Home", FormMethod.Post))
+        @using (Html.BeginForm("SearchMulticritere", "Home", FormMethod.Get))
         {
-            <input type="text" name="keywords" id="keywords" placeholder="Recherche" />
-            <button type="submit">Rechercher</button>
+            <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre" />
+            <select class="form-control" name="idgenre" id="idgenre">
+                <option disabled selected>Genre</option>
+                @foreach (var item in genres)
+                {
+                    <option value="@item.Id">@item.Designation</option>
+                }
+            </select>
+            <select class="form-control" name="idauteur" id="idauteur">
+                <option disabled selected>Auteur</option>
+                @foreach (var item in auteurs)
+                {
+                    <option  value="@item.Id">@item.Nom @item.Prenom</option>
+                }
+            </select>
+            <button class="btn btn-default" type="submit">Rechercher</button>
         }
     </div>
     <div class="row">
-        @if (Model != null)
+        @if (livres != null)
         {
-            foreach (var item in Model)
+            foreach (var item in livres)
             {
                 <div style="margin-bottom: 25px;">
                     <label>@Html.DisplayFor(modelItem => item.Titre)</label>
@@ -32,5 +49,5 @@
         {
             < p > Aucun livre correspondant a votre recherche </ p >
         }
-        </div>
+    </div>
 </div>
