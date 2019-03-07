@@ -1,45 +1,158 @@
-﻿@if (Session["NomUtilisateur"] == null)
+﻿@*@if (Session["NomUtilisateur"] == null)
 {
     Response.Redirect("~/Home/Login");
-}
+}*@
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <title>@ViewBag.Title - tiaBoky</title>
+    <!-- Style -->
+    @Styles.Render("~/Content/bootstrap-4.1.3/bootstrap.css")
+    @Styles.Render("~/Scripts/font-awesome-4.7.0/css/font-awesome.min.css")
+    @Styles.Render("~/Scripts/OwlCarousel2-2.2.1/owl.carousel.css")
+    @Styles.Render("~/Scripts/OwlCarousel2-2.2.1/owl.theme.default.css")
+    @Styles.Render("~/Scripts/OwlCarousel2-2.2.1/animate.css")
+    @Styles.Render("~/Content/main_styles.css")
+    @Styles.Render("~/Content/responsive.css")
+
+    @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
+    @Scripts.Render("~/Content/bootstrap-4.1.3/popper.js")
+    @Scripts.Render("~/Content/bootstrap-4.1.3/bootstrap.min.js")
+    @Scripts.Render("~/Scripts/greensock/TweenMax.min.js")
+    @Scripts.Render("~/Scripts/greensock/TimelineMax.min.js")
+    @Scripts.Render("~/Scripts/scrollmagic/scrollmagic.min.js")
+    @Scripts.Render("~/Scripts/greensock/animation.gsap.min.js")
+    @Scripts.Render("~/Scripts/greensock/ScrollToPlugin.min.js")
+    @Scripts.Render("~/Scripts/OwlCarousel2-2.2.1/owl.carousel.js")
+    @Scripts.Render("~/Scripts/parallax-js-master/parallax.min.js")
+    @Scripts.Render("~/Scripts/Isotope/isotope.pkgd.min.js")
+    @Scripts.Render("~/Scripts/Isotope/fitcolumns.js")
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Book", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="super_container">
+
+        <div class="sidebar">
+            <!-- Logo -->
+            <div class="sidebar_logo">
+                <a href="#"><div>tia<span>Boky</span></div></a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar_nav">
+                <ul>
+                    <li><a href="index.html">@Html.ActionLink("Accueil", "Index", "Home") <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li><a href="#"> @Html.ActionLink("Genres", "Index", "Genres") <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li><a href="#">@Html.ActionLink("Auteurs", "Index", "Auteurs") <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li><a href="#">Genres <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li><a href="#">@Html.ActionLink("Communauté ", "Login", "Home") <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                 </ul>
+            </nav>
+
+            <!-- Search -->
+            <div class="search">
+                <form action="#" class="search_form" id="sidebar_search_form">
+                    <input type="text" class="search_input" placeholder="Rechercher partout dans le site" required="required">
+                    <button class="search_button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </form>
             </div>
+
+            <!-- Cart -->
+            <div class="cart d-flex flex-row align-items-center justify-content-start">
+
+            </div>
+
         </div>
-    </div>
-    <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer class="footer">
+            <!-- Social -->
+            <div class="footer_social">
+                <div class="section_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="footer_social_container d-flex flex-row align-items-center justify-content-between">
+                                    <!-- Instagram -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">instagram</div>
+                                        </div>
+                                    </a>
+                                    <!-- Google + -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-google-plus" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">google +</div>
+                                        </div>
+                                    </a>
+                                    <!-- Pinterest -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-pinterest" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">pinterest</div>
+                                        </div>
+                                    </a>
+                                    <!-- Facebook -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">facebook</div>
+                                        </div>
+                                    </a>
+                                    <!-- Twitter -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">twitter</div>
+                                        </div>
+                                    </a>
+                                    <!-- YouTube -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-youtube" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">youtube</div>
+                                        </div>
+                                    </a>
+                                    <!-- Tumblr -->
+                                    <a href="#">
+                                        <div class="footer_social_item d-flex flex-row align-items-center justify-content-start">
+                                            <div class="footer_social_icon"><i class="fa fa-tumblr-square" aria-hidden="true"></i></div>
+                                            <div class="footer_social_title">tumblr</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Credits -->
+            <div class="credits">
+                <div class="section_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="credits_content d-flex flex-row align-items-center justify-content-end">
+                                    <div class="credits_text">
+                                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                        Copyright &copy;
+                                        <script>document.write(new Date().getFullYear());</script> Gasy Tia Boky</a>
+                                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+ 
     @RenderSection("scripts", required: false)
 </body>
 </html>

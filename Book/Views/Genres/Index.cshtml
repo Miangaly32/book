@@ -1,34 +1,114 @@
-﻿@model IEnumerable<Book.Models.Genre>
+﻿@model Book.Models.Genre_List
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Livre";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Scripts.Render("~/Scripts/easing/easing.js")
+@Scripts.Render("~/Scripts/categories.js")
+@Styles.Render("~/Content/categories.css")
+@Styles.Render("~/Content/categories_responsive.css")
+<!-- Home -->
 
-<h2>Index</h2>
+<div class="home">
+    <div class="parallax_background parallax-window" data-parallax="scroll" style="background: url(../../media/images/categories.jpg) center" data-speed="0.8"></div>
+    <div class="home_container">
+        <div class="home_content">
+            <div class="home_title">Par Genres</div>
+        </div>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Designation)
-        </th>
-        <th></th>
-    </tr>
+<!-- Products -->
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Designation)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<div class="products">
 
-</table>
+    <!-- Sorting & Filtering -->
+    <div class="products_bar">
+        <div class="section_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="products_bar_content d-flex flex-column flex-xxl-row align-items-start align-items-xxl-center justify-content-start">
+                            <div class="product_categories">
+                                <ul class="d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                    <li>@Html.ActionLink("Tous", "Index", "Genres", new { id = -1 }, null)</li>
+                                    @foreach (var item in Model.genre_tab)
+                                    {
+                                    <li>@Html.ActionLink(item.Designation, "Index", new { id = item.Id }, null)</li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="products_bar_side ml-xxl-auto d-flex flex-row align-items-center justify-content-start">
+                                <div class="products_dropdown product_dropdown_sorting">
+                                    <div class="isotope_sorting_text"><span>Trier par</span><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+                                    <ul>
+                                        <li class="item_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'>Default</li>
+                                        <li class="item_sorting_btn" data-isotope-option='{ "sortBy": "price" }'>Price</li>
+                                        <li class="item_sorting_btn" data-isotope-option='{ "sortBy": "name" }'>Name</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="products_container grid">
+                        @foreach (var item in Model.genre_page)
+                        {
+                            foreach (var item1 in item.Livres)
+                            {
+                                <div class="product grid-item">
+                                    <div class="product_inner">
+                                        <div class="product_image">
+                                            <img src="~/media/images/@Html.DisplayFor(modelItem => item1.image)" alt="" width="239" height="362">
+                                        </div>
+                                        <div class="product_content text-center">
+                                            <div class="product_title">@Html.DisplayFor(modelItem => item1.Titre)</div>
+                                            <span class="product_subtitle" style="display: block;width: 150px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">@Html.DisplayFor(modelItem => item1.Description)</span>
+                                            <div class="product_button ml-auto mr-auto trans_200">@Html.ActionLink("Voir", "Details", "Livres", new { id = item1.Id },null)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<h2>Index</h2>
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Designation)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Designation)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>*@

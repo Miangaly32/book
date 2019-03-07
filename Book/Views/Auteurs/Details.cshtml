@@ -24,8 +24,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Prenom)
+            @foreach (var item in Model.Livres)
+            {
+                @Html.DisplayFor(modelItem => item.Titre)
+            }
         </dd>
+
 
     </dl>
 </div>

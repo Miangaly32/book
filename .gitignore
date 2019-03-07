@@ -4,3 +4,7 @@
 packages/
 
 BookDB/
+
+Book/bin/
+
+Book/obj/

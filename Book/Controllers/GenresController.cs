@@ -15,9 +15,23 @@ namespace Book.Controllers
         private bookEntities1 db = new bookEntities1();
 
         // GET: Genres
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(db.Genres.ToList());
+            Genre_List liste_Genre = new Genre_List();
+            liste_Genre.genre_tab = db.Genres.ToList();
+            if (id == null || id == -1)
+            {
+                liste_Genre.genre_page = db.Genres.ToList();
+                return View(liste_Genre);
+            }
+            Genre genre = db.Genres.Find(id);
+            if (genre == null)
+            {
+                return HttpNotFound();
+            }
+            liste_Genre.genre_page = new List<Genre>(1);
+            liste_Genre.genre_page.Add(genre);
+            return View(liste_Genre);
         }
 
         // GET: Genres/Details/5

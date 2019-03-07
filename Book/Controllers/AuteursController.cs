@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Book.Models;
+using System.Diagnostics;
 
 namespace Book.Controllers
 {
@@ -15,9 +16,23 @@ namespace Book.Controllers
         private bookEntities1 db = new bookEntities1();
 
         // GET: Auteurs
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(db.Auteurs.ToList());
+            Auteur_List liste_Auteur = new Auteur_List();
+            liste_Auteur.auteurTab = db.Auteurs.ToList();
+            if (id == null || id == -1)
+            {
+                liste_Auteur.auteurPage = db.Auteurs.ToList();
+                return View(liste_Auteur);
+            }                        
+            Auteur auteur = db.Auteurs.Find(id);
+            if(auteur == null)
+            {
+                return HttpNotFound();
+            }
+            liste_Auteur.auteurPage = new List<Auteur>(1);
+            liste_Auteur.auteurPage.Add(auteur);
+            return View(liste_Auteur);
         }
 
         // GET: Auteurs/Details/5
@@ -25,7 +40,7 @@ namespace Book.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Auteur");
             }
             Auteur auteur = db.Auteurs.Find(id);
             if (auteur == null)

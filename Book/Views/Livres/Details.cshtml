@@ -4,64 +4,48 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Styles.Render("~/Content/blog.css")
+@Styles.Render("~/Content/blog_responsive.css")
 
-<h2>Details</h2>
+@Scripts.Render("~/Scripts/blog.js")
 
-<div>
-    <h4>Livre</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Titre)
-        </dt>
+<div class="blog">
+    <div class="section_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
 
-        <dd>
-            @Html.DisplayFor(model => model.Titre)
-        </dd>
+                    <!-- Blog Posts -->
+                    <div class="blog_bosts">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                        <!-- Blog Post -->
+                        <div class="blog_post row">
+                            <div class="blog_post_image col col-3"><img src="~/media/images/@Html.DisplayFor(model => model.image)" /></div>
+                            <div class="blog_post_content col col-9">
+                                <div class="blog_post_title"><a href="#">@Html.DisplayFor(model => model.Titre)</a></div>
+                                <div class="blog_post_info d-flex flex-row align-items-start justify-content-start">
+                                    <div class="blog_post_date"><a href="#">@Html.ActionLink(Model.Auteur.Nom+" "+Model.Auteur.Prenom, "Index", "Auteurs", new { id = Model.Auteur.Id }, null)</a></div>
+                                    <div class="blog_post_category">
+                                        <ul>
+                                            <li>dans @Html.ActionLink(Model.Genre.Designation, "Index", "Genres", new { id = Model.Genre.Id }, null)</li>
+                                        </ul>
+                                        <ul>
+                                            <li>Publié le @Model.DateSortie.Value.ToString("dd/MM/yyyy")</li>
+</ul>
+                                    </div>
+                                </div>
+                                <div class="blog_post_text">
+                                    @Html.DisplayFor(model => model.Description)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateSortie)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateSortie)
-        </dd>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.image)
-        </dt>
-
-        <dd>
-            <img src="~/media/images/@Html.DisplayFor(model => model.image)" alt="Image" />
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Auteur.Nom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Auteur.Nom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre.Designation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Genre.Designation)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
