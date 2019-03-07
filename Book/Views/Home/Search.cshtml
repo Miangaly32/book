@@ -38,16 +38,16 @@
                 <div style="margin-bottom: 25px;">
                     <label>@Html.DisplayFor(modelItem => item.Titre)</label>
                     <br />
-                    <a href="@Url.Action("Details", "Livres", item.Id)"><img src="~/media/images/@Html.DisplayFor(modelItem => item.image)" alt="Image" /></a>
+                    <a href="@Url.Action("Livre", "Livres", new { id = @item.Id })"><img src="~/media/images/@Html.DisplayFor(modelItem => item.image)" alt="Image" /></a>
                     <br />
                     <br />
-                    <a href="@Url.Action("Details", "Livres", item.Id)" class="gameBox__btn gameBox__btn--large">Details</a>
+                    <a href="@Url.Action("Livre", "Livres", new { id = @item.Id })" class="gameBox__btn gameBox__btn--large">Details</a>
                 </div>
             }
         }
         else
         {
-            < p > Aucun livre correspondant a votre recherche </ p >
+            <p> Aucun livre correspondant a votre recherche </p>
         }
     </div>
 </div>

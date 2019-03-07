@@ -9,12 +9,15 @@ using System.Web;
 using System.Web.Mvc;
 using Book.Models;
 using System.Data.Entity.Validation;
+using Book.Services;
 
 namespace Book.Controllers
 {
     public class LivresController : Controller
     {
         private bookEntities1 db = new bookEntities1();
+        GenreService genreService = new GenreService();
+        AuteurService auteurService = new AuteurService();
 
         // GET: Livres
         public ActionResult Index()
@@ -187,6 +190,14 @@ namespace Book.Controllers
             {
                 return HttpNotFound();
             }
+
+            List<Genre> genres = genreService.GetAllGenres().ToList();
+            List<Auteur> auteurs = auteurService.GetAllAuteurs().ToList();
+
+            
+            ViewBag.genres = genres;
+            ViewBag.auteurs = auteurs;
+
             return View(livre);
 
         }
