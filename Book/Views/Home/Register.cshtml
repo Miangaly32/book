@@ -1,0 +1,60 @@
+﻿@model Book.Models.Utilisateur
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/checkout.css")
+@Styles.Render("~/Content/checkout_responsive.css")
+
+@Scripts.Render("~/Scripts/checkout.js")
+@Scripts.Render("~/Scripts/easing/easing.js")
+<div class="home">
+    <div class="parallax_background parallax-window" data-parallax="scroll" style="background: url(.../../media/images/checkout.jpg) center" data-speed="0.8"></div>
+    <div class="home_container">
+        <div class="home_content">
+            <div class="home_title"></div>
+            <div class="breadcrumbs">
+                <ul class="d-flex flex-row align-items-center justify-content-start"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-lg-3"></div>
+    <div class="col col-lg-9">
+        <div class="billing checkout_box">
+            <div class="checkout_title">Rejoindre la communauté tiaBoky  </div>
+            <div class="checkout_form_container">
+                @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "checkout_form", @id = "checkout_form" }))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">Nom et prenom(s) </label>
+                        <input type="text" class="checkout_input" id="checkout_company" />
+                    </div>
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">E-mail</label>
+                        @Html.EditorFor(model => model.NomUtilisateur, new { htmlAttributes = new { @class = "checkout_input", @id = "checkout_company" } })
+                        
+                    </div>
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">Mot de passe</label>
+                        @Html.PasswordFor(model => model.MotDePasse,  new { @class = "checkout_input", @id = "checkout_company" } )
+                    </div>
+                    <div>
+                        <label for="checkout_company">Confirmer mot de passe</label>
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "checkout_input", @id = "checkout_company" })
+                    </div>
+
+                    <button type="submit" class="checkout_button trans_200">Se connecter</button>
+                    <div class="order_text">Deja membre? Connectez-vous @Html.ActionLink("ici", "Login") </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

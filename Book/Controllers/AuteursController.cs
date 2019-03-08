@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Book.Models;
 using System.Diagnostics;
+using PagedList;
 
 namespace Book.Controllers
 {
@@ -51,9 +52,12 @@ namespace Book.Controllers
         }
 
         // GET: Auteurs/Create
+        [Authorize]
         public ActionResult Create()
         {
-            return View();
+            List<Auteur> allAuteur = db.Auteurs.ToList();
+            ViewBag.auteur = allAuteur;
+            return View("Create");
         }
 
         // POST: Auteurs/Create
@@ -67,7 +71,7 @@ namespace Book.Controllers
             {
                 db.Auteurs.Add(auteur);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(auteur);
@@ -99,7 +103,7 @@ namespace Book.Controllers
             {
                 db.Entry(auteur).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
             return View(auteur);
         }
@@ -127,7 +131,7 @@ namespace Book.Controllers
             Auteur auteur = db.Auteurs.Find(id);
             db.Auteurs.Remove(auteur);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Create");
         }
 
         protected override void Dispose(bool disposing)

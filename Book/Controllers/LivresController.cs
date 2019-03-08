@@ -20,6 +20,7 @@ namespace Book.Controllers
         AuteurService auteurService = new AuteurService();
 
         // GET: Livres
+        [Authorize]
         public ActionResult Index()
         {
             var livres = db.Livres.Include(l => l.Auteur).Include(l => l.Genre);
@@ -47,10 +48,11 @@ namespace Book.Controllers
         // GET: Livres/Create
         public ActionResult Create()
         {
-           
             ViewBag.IdAuteur = new SelectList(db.Auteurs, "Id", "Nom");
             ViewBag.IdGenre = new SelectList(db.Genres, "Id", "Designation");
-            return View();
+            List<Livre> allLivre = db.Livres.ToList();
+            ViewBag.allLivres = allLivre;
+            return View("Create");
           
         }
 
@@ -72,7 +74,7 @@ namespace Book.Controllers
                         livre.image = image.FileName;
                         db.Livres.Add(livre);
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Create");
                      }
                     catch (DbEntityValidationException e)
                     {

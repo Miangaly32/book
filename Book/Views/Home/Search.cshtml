@@ -1,53 +1,81 @@
 ﻿@{
     ViewBag.Title = "Result";
-    Layout = "~/Views/Shared/front_layout.cshtml";
-    List< Book.Models.Livre> livres  = ViewBag.livres;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Book.Models.Livre> livres = ViewBag.livres;
     List<Book.Models.Genre> genres = ViewBag.genres;
     List<Book.Models.Auteur> auteurs = ViewBag.auteurs;
 }
 
-
-<div class="gameBox">
-    <div class="gameBox__header">
-        <h2>Recherche</h2>
-        @using (Html.BeginForm("SearchMulticritere", "Home", FormMethod.Get))
-        {
-            <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre" />
-            <select class="form-control" name="idgenre" id="idgenre">
-                <option disabled selected>Genre</option>
-                @foreach (var item in genres)
+@Styles.Render("~/Content/checkout.css")
+@Styles.Render("~/Content/checkout_responsive.css")
+@Scripts.Render("~/Scripts/checkout.js")
+@Styles.Render("~/Content/categories.css")
+@Styles.Render("~/Content/categories_responsive.css")
+@Scripts.Render("~/Scripts/easing/easing.js")
+@Scripts.Render("~/Scripts/categories.js")
+<div class="row">
+    <div class="col col-lg-2"></div>
+    <div class="col col-lg-10">
+        <div class="billing checkout_box">
+            <div class="checkout_title">Recherche </div>
+            <div class="checkout_form_container">
+                @using (Html.BeginForm("SearchMulticritere", "Home", FormMethod.Get, new { @class = "checkout_form", @id = "checkout_form" }))
                 {
-                    <option value="@item.Id">@item.Designation</option>
+                    <input type="text" class="checkout_input" name="titre" id="titre" placeholder="Titre" />
+                    <select class="checkout_input" name="idgenre" id="idgenre">
+                        <option disabled selected>Genre</option>
+                        @foreach (var item in genres)
+                        {
+                            <option value="@item.Id">@item.Designation</option>
+                        }
+                    </select>
+                    <select class="checkout_input" name="idauteur" id="idauteur">
+                        <option disabled selected>Auteur</option>
+                        @foreach (var item in auteurs)
+                        {
+                            <option value="@item.Id">@item.Prenom @item.Nom</option>
+                        }
+                    </select>
+                    <button type="submit" class="checkout_button trans_200">Rechercher</button>
                 }
-            </select>
-            <select class="form-control" name="idauteur" id="idauteur">
-                <option disabled selected>Auteur</option>
-                @foreach (var item in auteurs)
-                {
-                <option value="@item.Id">@item.Prenom @item.Nom</option>
-                }
-            </select>
-            <button class="btn btn-default" type="submit">Rechercher</button>
-        }
-    </div>
-    <div class="row">
-        @if (livres != null)
-        {
-            foreach (var item in livres)
-            {
-                <div style="margin-bottom: 25px;">
-                    <label>@Html.DisplayFor(modelItem => item.Titre)</label>
-                    <br />
-                    <a href="@Url.Action("Livre", "Livres", new { id = @item.Id })"><img src="~/media/images/@Html.DisplayFor(modelItem => item.image)" alt="Image" /></a>
-                    <br />
-                    <br />
-                    <a href="@Url.Action("Livre", "Livres", new { id = @item.Id })" class="gameBox__btn gameBox__btn--large">Details</a>
-                </div>
-            }
-        }
-        else
-        {
-            <p> Aucun livre correspondant a votre recherche </p>
-        }
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="section_container">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                @if (livres != null)
+                {
+                    <div class="products_container grid">
+                        <!-- Product -->
+                        @foreach (var item in livres)
+                        {
+                            <div class="product grid-item">
+                                <div class="product_inner">
+                                    <div class="product_image">
+                                        <img src="~/media/images/@Html.DisplayFor(modelItem => item.image)" alt="" width="239" height="362">
+                                    </div>
+                                    <div class="product_content text-center">
+                                        <div class="product_title">@Html.DisplayFor(modelItem => item.Titre)</div>
+                                        <span class="product_subtitle" style="display: block;width: 150px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">@Html.DisplayFor(modelItem => item.Description)</span>
+                                        <div class="product_button ml-auto mr-auto trans_200">@Html.ActionLink("Voir", "Details", "Livres", new { id = item.Id }, null)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p style="color: #000"> Aucun livre correspondant a votre recherche </p>
+                }
+            </div>
+            
+            </div>
+        </div>
+    </div>
+        
+       

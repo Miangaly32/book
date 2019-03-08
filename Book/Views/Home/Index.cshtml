@@ -1,4 +1,5 @@
 ﻿@using Book.Models
+@model IEnumerable<Book.Models.Livre>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -109,118 +110,22 @@
             <div class="row">
                 <div class="col">
                     <div class="products_container grid">
-
-                        <!-- Product -->
-                        <div class="product grid-item hot">
+                       @foreach(var item1 in Model) {
+                        <div class="product grid-item">
                             <div class="product_inner">
                                 <div class="product_image">
-                                    <img src="~/media/images/product_1.jpg" alt="" width="239" height="362">
+                                    <img src="~/media/images/@Html.DisplayFor(modelItem => item1.image)" alt="" width="239" height="362">
                                 </div>
                                 <div class="product_content text-center">
-                                    <div class="product_title"><a href="blog.html">Da Vinci Code</a></div>
-                                    <div class="product_subtitle">Le meilleur livre de tous les temps....</div>
-                                    <div class="product_button ml-auto mr-auto trans_200"><a href="#">Voir</a></div>
+                                    <div class="product_title">@Html.DisplayFor(modelItem => item1.Titre)</div>
+                                    <span class="product_subtitle" style="display: block;width: 150px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">@Html.DisplayFor(modelItem => item1.Description)</span>
+                                    <div class="product_button ml-auto mr-auto trans_200">@Html.ActionLink("Voir", "Details", "Livres", new { id = item1.Id }, null)</div>
                                 </div>
                             </div>
                         </div>
+                        }
 
-                        <!-- Product -->
-                        <div class="product grid-item hot">
-                            <div class="product_inner">
-                                <div class="product_image">
-                                    <img src="~/media/images/product_1.jpg" alt="" width="239" height="362">
-                                </div>
-                                <div class="product_content text-center">
-                                    <div class="product_title"><a href="blog.html">Da Vinci Code</a></div>
-                                    <div class="product_subtitle">Le meilleur livre de tous les temps....</div>
-                                    <div class="product_button ml-auto mr-auto trans_200"><a href="#">Voir</a></div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Product -->
-                        <div class="product grid-item hot">
-                            <div class="product_inner">
-                                <div class="product_image">
-                                    <img src="~/media/images/product_1.jpg" alt="" width="239" height="362">
-                                </div>
-                                <div class="product_content text-center">
-                                    <div class="product_title"><a href="blog.html">Da Vinci Code</a></div>
-                                    <div class="product_subtitle">Le meilleur livre de tous les temps....</div>
-                                    <div class="product_button ml-auto mr-auto trans_200"><a href="blog.html">Voir</a></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product grid-item hot">
-                            <div class="product_inner">
-                                <div class="product_image">
-                                    <img src="~/media/images/product_1.jpg" alt="" width="239" height="362">
-                                </div>
-                                <div class="product_content text-center">
-                                    <div class="product_title"><a href="blog.html">Da Vinci Code</a></div>
-                                    <div class="product_subtitle">Le meilleur livre de tous les temps....</div>
-                                    <div class="product_button ml-auto mr-auto trans_200"><a href="#">Voir</a></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product grid-item hot">
-                            <div class="product_inner">
-                                <div class="product_image">
-                                    <img src="~/media/images/product_1.jpg" alt="" width="239" height="362">
-                                </div>
-                                <div class="product_content text-center">
-                                    <div class="product_title"><a href="blog.html">Da Vinci Code</a></div>
-                                    <div class="product_subtitle">Le meilleur livre de tous les temps....</div>
-                                    <div class="product_button ml-auto mr-auto trans_200"><a href="#">Voir</a></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product grid-item hot">
-                            <div class="product_inner">
-                                <div class="product_image">
-                                    <img src="~/media/images/product_1.jpg" alt="" width="239" height="362">
-                                </div>
-                                <div class="product_content text-center">
-                                    <div class="product_title"><a href="blog.html">Da Vinci Code</a></div>
-                                    <div class="product_subtitle">Le meilleur livre de tous les temps....</div>
-                                    <div class="product_button ml-auto mr-auto trans_200"><a href="#">Voir</a></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product grid-item hot">
-                            <div class="product_inner">
-                                <div class="product_image">
-                                    <img src="~/media/images/product_1.jpg" alt="" width="239" height="362">
-                                </div>
-                                <div class="product_content text-center">
-                                    <div class="product_title"><a href="blog.html">Da Vinci Code</a></div>
-                                    <div class="product_subtitle">Le meilleur livre de tous les temps....</div>
-                                    <div class="product_button ml-auto mr-auto trans_200"><a href="#">Voir</a></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product -->
-                        <div class="product grid-item hot">
-                            <div class="product_inner">
-                                <div class="product_image">
-                                    <img src="~/media/images/product_1.jpg" alt="" width="239" height="362">
-                                </div>
-                                <div class="product_content text-center">
-                                    <div class="product_title"><a href="blog.html">Da Vinci Code</a></div>
-                                    <div class="product_subtitle">Le meilleur livre de tous les temps....</div>
-                                    <div class="product_button ml-auto mr-auto trans_200"><a href="#">Voir</a></div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

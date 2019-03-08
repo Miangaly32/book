@@ -2,75 +2,98 @@
 
 @{
     ViewBag.Title = "Create";
+    List<Book.Models.Livre> livres = ViewBag.allLivres;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm("Create", "Livres", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Livre</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Titre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Titre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Titre, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateSortie, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateSortie, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-                @Html.ValidationMessageFor(model => model.DateSortie, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdAuteur, "IdAuteur", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdAuteur", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdAuteur, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdGenre, "IdGenre", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdGenre", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdGenre, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+@Styles.Render("~/Content/checkout.css")
+@Styles.Render("~/Content/checkout_responsive.css")
+@Styles.Render("~/Content/cart.css")
+@Styles.Render("~/Content/cart_responsive.css")
+@Scripts.Render("~/Scripts/checkout.js")
+@Scripts.Render("~/Scripts/cart.js")
+@Scripts.Render("~/Scripts/easing/easing.js")
+<div class="row">
+    <div class="col col-lg-3"></div>
+    <div class="col col-lg-9">
+        <div class="billing checkout_box">
+            <div class="checkout_title">Ajouter un Livre</div>
+            <div class="checkout_form_container">
+                @using (Html.BeginForm("Create", "Livres", FormMethod.Post, new { @class = "checkout_form", @id = "checkout_form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">Titre du Livre </label>
+                        @Html.TextBoxFor(model => model.Titre, htmlAttributes: new { @class = "checkout_input", @id = "checkout_company" })
+                    </div>
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">Resume du Livre</label>
+                        @Html.TextBoxFor(model => model.Description, htmlAttributes: new { @class = "checkout_input", @id = "checkout_company" })
+                    </div>
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">Date de Sortie</label>
+                        @Html.TextBoxFor(model => model.DateSortie,  new { @class = "checkout_input", @id = "checkout_company" , @type = "date"})
+                    </div>
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">Auteur du Livre</label>
+                        @Html.DropDownList("IdAuteur", null, htmlAttributes: new { @class = "checkout_input", @id = "checkout_company" })
+                    </div>
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">Genre</label>
+                        @Html.DropDownList("IdGenre", null, htmlAttributes: new { @class = "checkout_input", @id = "checkout_company" })
+                    </div>
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">Image</label>
+                        @Html.TextBoxFor(model => model.image, new { @class = "checkout_input", @id = "checkout_company", @type = "file" })
+                    </div>
+                    <button type="submit" class="checkout_button trans_200">Creer</button>
+                }
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+<br />
+<div class="section_container">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="cart_container">
+                    <!-- Cart Bar -->
+                    <div class="cart_bar">
+                        <ul class="cart_bar_list item_list d-flex flex-row align-items-center justify-content-start" style="background-color: #fdfdfd; ">
+                            <li>Titre du Livre</li>
+                            <li>Resume</li>
+                            <li>Date de sortie</li>
+                            <li>Auteur</li>
+                            <li>Genre</li>    
+                            <li>Action</li>
+                        </ul>
+                        @foreach (var item in livres)
+                        {
+                        <ul class="cart_bar_list item_list d-flex flex-row align-items-center justify-content-start">
+                            <li>@item.Titre</li>
+                            <li><span  style="display: block;width: 150px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">@item.Description</span></li>
+                            <li>@item.DateSortie.Value.ToString("dd/MM/yyyy")</li>
+                            <li>@item.Auteur.Nom @item.Auteur.Prenom</li>
+                            <li>@item.Genre.Designation</li>
+                            <li>
+                                @Html.ActionLink("Modifier", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Supprimer", "Delete", new { id = item.Id })
+                            </li>
+                        </ul>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />

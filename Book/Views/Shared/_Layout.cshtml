@@ -44,21 +44,39 @@
             <!-- Sidebar Navigation -->
             <nav class="sidebar_nav">
                 <ul>
-                    <li><a href="index.html">@Html.ActionLink("Accueil", "Index", "Home") <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                    <li><a href="#"> @Html.ActionLink("Genres", "Index", "Genres") <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                    <li><a href="#">@Html.ActionLink("Auteurs", "Index", "Auteurs") <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                    <li><a href="#">Genres <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                    <li><a href="#">@Html.ActionLink("Communauté ", "Login", "Home") <i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    <li>@Html.ActionLink("Accueil", "Index", "Home") </li>
+                    <li> @Html.ActionLink("Genres", "Index", "Genres") <a data-toggle="collapse" href="#genre1" role="button" aria-expanded="false" aria-controls="genre1"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    @if (Session["NomUtilisateur"] != null)
+                    {
+                        <div class="collapse" id="genre1">
+                            <ul>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Ajouter Genre", "Create", "Genres", new { @style = "color: #bbe432" }, null) </li>
+                            </ul>
+                        </div>
+                    }
+                    <li>@Html.ActionLink("Auteurs", "Index", "Auteurs") <a data-toggle="collapse" href="#auteur1" role="button" aria-expanded="false" aria-controls="auteur1"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                    @if (Session["NomUtilisateur"] != null)
+                    {
+                        <div class="collapse" id="auteur1">
+                            <ul>
+                                <li>&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Ajouter Auteur", "Create", "Auteurs", new { @style = "color: #bbe432" }, null) </li>
+                            </ul>
+                        </div>
+                        <li>@Html.ActionLink("Nouveau Livre", "Create", "Livres")  </li>
+                        <li>@Html.ActionLink("Se deconnecter ", "Logout", "Home") </li>
+                    }
+
                 </ul>
             </nav>
 
             <!-- Search -->
             <div class="search">
-                <form action="#" class="search_form" id="sidebar_search_form">
-                    <input type="text" class="search_input" placeholder="Rechercher partout dans le site" required="required">
-                    <button class="search_button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </form>
-            </div>
+                @using (Html.BeginForm("SearchMulticritere", "Home", FormMethod.Get, new { @class = "checkout_form", @id = "checkout_form" }))
+                {
+                        <input type="text" class="search_input" placeholder="Rechercher partout dans le site" name="titre">
+                        <button class="search_button" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                }
+                </div>
 
             <!-- Cart -->
             <div class="cart d-flex flex-row align-items-center justify-content-start">

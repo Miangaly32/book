@@ -19,7 +19,7 @@ namespace Book.Controllers
 
         public ActionResult Index()
         {
-           return View();   
+           return View(db.Livres.ToList());   
         }
 
         public ActionResult Login()
@@ -41,6 +41,17 @@ namespace Book.Controllers
                 return RedirectToAction("Index");
             }
             return View(objUser);
+        }
+        
+        public ActionResult Register([Bind(Include = "Id,NomUtilisateur,MotDePasse,ConfirmPassword")] Utilisateur utilisateur)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Utilisateurs.Add(utilisateur);
+                db.SaveChanges();
+                return RedirectToAction("Login");
+            }
+            return View("Register");
         }
         public ActionResult Logout()
         {
@@ -75,7 +86,24 @@ namespace Book.Controllers
             ViewBag.auteurs = auteurService.GetAllAuteurs().ToList();
             return View(livres.ToList());
         }
-        
+        public ActionResult Search(String keywords)
+        {
+            Livre livre = new Livre();
+            livre.Titre = keywords;
+            livre.Genre = new Genre(keywords);
+            livre.Description = keywords;
+            livre.Auteur = new Auteur(keywords, keywords);
+            List<Livre> livres = livreService.Search(livre);
+            List<Genre> genres = genreService.GetAllGenres().ToList();
+            List<Auteur> auteurs = auteurService.GetAllAuteurs().ToList();
+
+
+            ViewBag.livres = livres;
+            ViewBag.genres = genres;
+            ViewBag.auteurs = auteurs;
+
+            return View();
+        }
         [HttpPost]
         public ActionResult SearchByKeywords(String keywords)
         {

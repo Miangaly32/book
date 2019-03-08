@@ -50,8 +50,11 @@ namespace Book.Controllers
         }
 
         // GET: Genres/Create
+        [Authorize]
         public ActionResult Create()
         {
+            List<Genre> allGenre = db.Genres.ToList();
+            ViewBag.genre = allGenre;
             return View();
         }
 
@@ -66,7 +69,7 @@ namespace Book.Controllers
             {
                 db.Genres.Add(genre);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(genre);
@@ -98,7 +101,7 @@ namespace Book.Controllers
             {
                 db.Entry(genre).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
             return View(genre);
         }
@@ -126,7 +129,7 @@ namespace Book.Controllers
             Genre genre = db.Genres.Find(id);
             db.Genres.Remove(genre);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Create");
         }
 
         protected override void Dispose(bool disposing)

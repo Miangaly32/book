@@ -2,43 +2,107 @@
 
 @{
     ViewBag.Title = "Create";
+    List<Book.Models.Auteur> auteurs = ViewBag.auteur;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+@Styles.Render("~/Content/checkout.css")
+@Styles.Render("~/Content/checkout_responsive.css")
+@Styles.Render("~/Content/cart.css")
+@Styles.Render("~/Content/cart_responsive.css")
+@Scripts.Render("~/Scripts/checkout.js")
+@Scripts.Render("~/Scripts/cart.js")
+@Scripts.Render("~/Scripts/easing/easing.js")
+<div class="row">
+    <div class="col col-lg-3"></div>
+    <div class="col col-lg-9">
+        <div class="billing checkout_box">
+            <div class="checkout_title">Ajouter un Auteur</div>
+            <div class="checkout_form_container">
+                @using (Html.BeginForm("Create", "Auteurs", FormMethod.Post, new { @class = "checkout_form", @id = "checkout_form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">Nom de l'auteur </label>
+                        @Html.TextBoxFor(model => model.Nom, new { @class = "checkout_input", @id = "checkout_company" })
+                    </div>
+                    <div>
+                        <!-- Company -->
+                        <label for="checkout_company">Prenom de l'auteur</label>
+                        @Html.TextBoxFor(model => model.Prenom, new { @class = "checkout_input", @id = "checkout_company" })
+                    </div>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Auteur</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Prenom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Prenom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Prenom, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                    <button type="submit" class="checkout_button trans_200">Creer</button>
+                }
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+<br />
+<div class="section_container">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="cart_container">
+                    <!-- Cart Bar -->
+                    <div class="cart_bar">
+                        <ul class="cart_bar_list item_list d-flex flex-row align-items-center justify-content-start" style="background-color: #fdfdfd; ">
+                            <li>Nom de l'auteur</li>
+                            <li>Prenom</li>
+                            <li>Action</li>
+                        </ul>
+                        @foreach (var item in auteurs)
+                        {
+                            <ul class="cart_bar_list item_list d-flex flex-row align-items-center justify-content-start">
+                                <li>@item.Nom</li>
+                                <li>@item.Prenom</li>
+                                <li>
+                                    @Html.ActionLink("Modifier", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                    @Html.ActionLink("Supprimer", "Delete", new { id = item.Id })
+                                </li>
+                            </ul>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+@*<h2>Create</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Auteur</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prenom, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Prenom, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Prenom, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }*@
+
